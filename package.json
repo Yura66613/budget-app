@@ -1,0 +1,16 @@
+{
+  "name": "budget-app",
+  "version": "1.0.0",
+  "description": "A React-based budget tracking application",
+  "scripts": {
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "preview": "cd frontend && npm run preview",
+    "lint": "cd frontend && npm run lint",
+    "install-deps": "cd frontend && npm install"
+  },
+  "keywords": ["react", "typescript", "budget", "expense-tracker", "vite"],
+  "author": "",
+  "license": "MIT",
+  "workspaces": ["frontend"]
+}

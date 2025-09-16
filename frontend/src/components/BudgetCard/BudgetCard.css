@@ -1,0 +1,88 @@
+.budget-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+}
+
+.budget-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.budget-card-header h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.2rem;
+}
+
+.budget-amount {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #27ae60;
+}
+
+.budget-progress {
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #3498db;
+  transition: width 0.3s ease;
+}
+
+.progress-fill.over-budget {
+  background-color: #e74c3c;
+}
+
+.progress-text {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.budget-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.budget-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.budget-detail .label {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-bottom: 0.25rem;
+}
+
+.budget-detail .value {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.value.over-budget {
+  color: #e74c3c;
+}
+
+.value.positive {
+  color: #27ae60;
+}
+
+.value.negative {
+  color: #e74c3c;
+}
