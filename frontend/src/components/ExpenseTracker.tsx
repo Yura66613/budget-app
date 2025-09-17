@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { expenseAPI, Expense } from '../services/expenseAPI';
+import { expenseAPI, accountAPI, Expense, Account } from '../services/expenseAPI';
 
 const ExpenseTracker: React.FC = () => {
   const [expenses, setExpenses] = useState<Expense[]>([]);
+  const [accounts, setAccounts] = useState<Account[]>([]);
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
+  const [selectedAccountId, setSelectedAccountId] = useState<number>(1);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Load expenses on component mount
+  // Load expenses and accounts on component mount
   useEffect(() => {
-    loadExpenses();
-  }, []);
+    loadData();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const loadData = async () => {
+    await Promise.all([loadExpenses(), loadAccounts()]);
+  };
 
   const loadExpenses = async () => {
     try {
@@ -29,8 +35,22 @@ const ExpenseTracker: React.FC = () => {
     }
   };
 
+  const loadAccounts = async () => {
+    try {
+      const { accounts: loadedAccounts } = await accountAPI.getAllAccounts();
+      setAccounts(loadedAccounts);
+      
+      // Set default account if none selected
+      if (loadedAccounts.length > 0 && selectedAccountId === 1) {
+        setSelectedAccountId(loadedAccounts[0].id);
+      }
+    } catch (err) {
+      console.error('Error loading accounts:', err);
+    }
+  };
+
   const addExpense = async () => {
-    if (!description.trim() || !amount || isNaN(Number(amount))) {
+    if (!description.trim() || !amount || isNaN(Number(amount)) || !selectedAccountId) {
       return;
     }
 
@@ -40,7 +60,8 @@ const ExpenseTracker: React.FC = () => {
       
       const newExpense = await expenseAPI.createExpense({
         description: description.trim(),
-        amount: Number(amount)
+        amount: Number(amount),
+        accountId: selectedAccountId
       });
       
       // Update local state
@@ -48,8 +69,8 @@ const ExpenseTracker: React.FC = () => {
       setDescription('');
       setAmount('');
       
-      // Refresh the total from the server
-      await loadExpenses();
+      // Refresh the data from the server
+      await loadData();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to add expense');
       console.error('Error adding expense:', err);
@@ -132,10 +153,24 @@ const ExpenseTracker: React.FC = () => {
             step="0.01"
           />
         </div>
+        <div className="form-group">
+          <label htmlFor="account">Account:</label>
+          <select
+            id="account"
+            value={selectedAccountId}
+            onChange={(e) => setSelectedAccountId(Number(e.target.value))}
+          >
+            {accounts.map((account) => (
+              <option key={account.id} value={account.id}>
+                {account.name} (${account.balance.toFixed(2)})
+              </option>
+            ))}
+          </select>
+        </div>
         <button
           className="btn btn-primary"
           onClick={addExpense}
-          disabled={!description.trim() || !amount || isNaN(Number(amount)) || loading}
+          disabled={!description.trim() || !amount || isNaN(Number(amount)) || !selectedAccountId || loading}
         >
           {loading ? 'Adding...' : 'Add Expense'}
         </button>
@@ -149,12 +184,18 @@ const ExpenseTracker: React.FC = () => {
             No expenses added yet. Add your first expense above!
           </div>
         ) : (
-          expenses.map((expense) => (
-            <div key={expense.id} className="expense-item">
-              <span className="expense-description">{expense.description}</span>
-              <span className="expense-amount">${expense.amount.toFixed(2)}</span>
-            </div>
-          ))
+          expenses.map((expense) => {
+            const account = accounts.find(acc => acc.id === expense.accountId);
+            return (
+              <div key={expense.id} className="expense-item">
+                <div className="expense-info">
+                  <span className="expense-description">{expense.description}</span>
+                  <span className="expense-account">Account: {account?.name || 'Unknown'}</span>
+                </div>
+                <span className="expense-amount">${expense.amount.toFixed(2)}</span>
+              </div>
+            );
+          })
         )}
       </div>
 
