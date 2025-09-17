@@ -1,8 +1,8 @@
 # Budget App - Full-Stack Expense Tracker
 
-A complete expense tracking application with React/TypeScript frontend and Express/TypeScript backend.
+A complete expense tracking application with React/TypeScript frontend and Express/TypeScript backend, featuring account management and expense tracking across multiple accounts.
 
-![Budget App Screenshot](https://github.com/user-attachments/assets/bc3405fc-8040-4e7c-9246-b4e95b0ac849)
+![Budget App Screenshot - Expenses Tab](https://github.com/user-attachments/assets/539b5b46-62fa-44e2-b762-eeab0f6863fd)
 
 ## Architecture
 
@@ -13,12 +13,24 @@ A complete expense tracking application with React/TypeScript frontend and Expre
 
 ## Features
 
-- ✅ **Expense Management**: Add expenses with descriptions and amounts
-- ✅ **Real-time Totals**: Automatic calculation and display of total expenses
-- ✅ **Data Persistence**: Backend API stores expenses during session
-- ✅ **Input Validation**: Client and server-side validation
-- ✅ **Error Handling**: Graceful error handling with user feedback
-- ✅ **Loading States**: Visual feedback during API operations
+### 🏦 Account Management
+- ✅ **Create Accounts**: Add multiple accounts with names, descriptions, and initial balances
+- ✅ **Account Overview**: View all accounts with current balances and total balance
+- ✅ **Account Protection**: Default account cannot be deleted to ensure data integrity
+- ✅ **Balance Tracking**: Real-time balance updates when expenses are added
+
+### 💰 Expense Management
+- ✅ **Account Association**: All expenses must be linked to a specific account
+- ✅ **Multi-Account Support**: Track expenses across different accounts
+- ✅ **Real-time Updates**: Account balances automatically adjust when expenses are added
+- ✅ **Expense History**: View all expenses with their associated accounts
+- ✅ **Total Calculation**: Sum expenses across all accounts
+
+### 🎨 User Interface
+- ✅ **Tab Navigation**: Switch between Expenses and Accounts management views
+- ✅ **Account Selection**: Choose which account to charge expenses to via dropdown
+- ✅ **Real-time Feedback**: Loading states, error handling, and success indicators
+- ✅ **Input Validation**: Client and server-side validation for all inputs
 - ✅ **Responsive Design**: Clean, modern UI that works on all devices
 
 ## Getting Started
@@ -121,36 +133,57 @@ npm start
 
 ### How to Use
 
-#### Adding Your First Expense
-1. **Enter Description**: Type what you spent money on (e.g., "Coffee", "Groceries")
-2. **Enter Amount**: Type the amount (e.g., "4.50", "25.99")
-3. **Submit**: Click "Add Expense" or press Enter
-4. **Verify**: Your expense should appear in the list below
+#### Getting Started with the Application
 
-#### Managing Expenses
-- **View All Expenses**: All expenses are displayed in a list format
-- **See Total**: The total amount is calculated automatically
-- **Refresh Total**: Click "Sum Up All Expenses" to recalculate from server
+**Managing Accounts:**
+1. Click the "Accounts" tab to view and manage your accounts
+2. The app starts with a default "Main Account" 
+3. Click "Add Account" to create additional accounts with custom names, descriptions, and initial balances
+4. View total balance across all accounts
+
+**Adding Expenses:**
+1. Click the "Expenses" tab to manage your expenses
+2. Enter a description for your expense (e.g., "Coffee", "Groceries")
+3. Enter the amount (e.g., "4.50", "25.99")
+4. Select which account to charge the expense to from the dropdown
+5. Click "Add Expense" or press Enter
+6. Watch as the account balance updates automatically
+
+#### Managing Accounts and Expenses
+
+- **Account Creation**: Create multiple accounts for different purposes (e.g., "Main Account", "Savings", "Credit Card")
+- **Balance Tracking**: Each account shows its current balance, which decreases when expenses are added
+- **Account Selection**: Choose which account to charge expenses to using the dropdown menu
+- **Expense History**: View all expenses with their descriptions, amounts, and associated accounts
+- **Total Calculations**: See total expenses across all accounts in the summary
 - **Data Persistence**: Data persists while the server is running (resets on server restart)
 
 ### Detailed Usage
 
-1. **Add an Expense**:
+1. **Create Additional Accounts** (Optional):
+   - Go to the "Accounts" tab
+   - Click "Add Account" 
+   - Enter account name, description (optional), and initial balance (optional)
+   - Click "Create Account"
+
+2. **Add an Expense**:
+   - Go to the "Expenses" tab
    - Enter a description for your expense
    - Enter the amount (numbers only, supports decimals)
+   - Select which account to charge from the dropdown
    - Click "Add Expense" or press Enter
-   - Data is automatically saved to the backend
+   - Data is automatically saved to the backend and account balance updates
 
-2. **View Your Expenses**:
-   - All expenses are displayed in a list
-   - Each expense shows description and formatted amount
+3. **View Your Expenses and Accounts**:
+   - All expenses are displayed with their associated account information
+   - Account balances are updated in real-time
    - Counter shows total number of expenses
-   - Data persists during the session
+   - Total summary shows sum of all expenses across accounts
 
-3. **Calculate Total**:
-   - Total is updated automatically when adding expenses
-   - Click "Sum Up All Expenses" to refresh from server
-   - Total reflects all expenses stored in the backend
+4. **Account Management**:
+   - View all accounts and their balances in the "Accounts" tab
+   - Delete accounts (except the default "Main Account")
+   - Monitor total balance across all accounts
 
 ## Troubleshooting
 
@@ -335,27 +368,39 @@ budget-app/
 
 ## Screenshots
 
-### Working Application with Backend Integration
+### Expenses Tab - Account Selection and Tracking
+![Budget App - Expenses Tab](https://github.com/user-attachments/assets/539b5b46-62fa-44e2-b762-eeab0f6863fd)
+*The Expenses tab now includes account selection dropdown and shows which account each expense belongs to*
+
+### Accounts Management Tab
+![Budget App - Accounts Tab](https://github.com/user-attachments/assets/67bf1f33-53b5-4609-a09f-caa1f05a79d8)
+*The new Accounts tab allows you to create and manage multiple accounts with balances*
+
+### Working Application with Backend Integration (Previous Version)
 ![Budget App with Backend](https://github.com/user-attachments/assets/bc3405fc-8040-4e7c-9246-b4e95b0ac849)
-
-### Initial State (Frontend Only)
-![Initial State](https://github.com/user-attachments/assets/bf2bd6fd-c90c-4f80-98bb-72eb80175a01)
-
-### With Expenses Added (Frontend Only)
-![With Expenses](https://github.com/user-attachments/assets/f983d4c5-4e21-4593-9ecb-ed076b2fc98d)
+*Previous version before accounts functionality was added*
 
 ## Validation Rules
 
 ### Frontend Validation
-- Expense description cannot be empty
-- Amount must be a valid positive number
-- Both fields are required to enable the "Add Expense" button
+- **Expense description** cannot be empty
+- **Amount** must be a valid positive number
+- **Account selection** is required (must select an existing account)
+- All required fields must be filled to enable the "Add Expense" button
 - Loading states prevent multiple simultaneous requests
+
+### Account Validation
+- **Account name** cannot be empty
+- **Initial balance** must be a non-negative number (if provided)
+- **Default account** cannot be deleted to ensure data integrity
+- Account names should be descriptive for easy identification
 
 ### Backend Validation  
 - Server-side input validation for all API endpoints
+- **Account existence** is verified before creating expenses
 - Error responses with descriptive messages
 - Type checking for all request data
+- **Account balance tracking** with automatic updates
 
 ## Future Enhancements
 
