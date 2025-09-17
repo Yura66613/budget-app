@@ -114,3 +114,188 @@
   font-style: italic;
   padding: 2rem;
 }
+
+/* Tab Navigation */
+.tab-navigation {
+  display: flex;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6c757d;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+}
+
+.tab-button:hover {
+  color: #007bff;
+  background-color: #f8f9fa;
+}
+
+.tab-button.active {
+  color: #007bff;
+  border-bottom-color: #007bff;
+}
+
+.tab-content {
+  min-height: 400px;
+}
+
+/* Account Manager Styles */
+.account-manager {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.account-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.account-header h2 {
+  margin: 0;
+  color: #333;
+}
+
+.total-balance {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #28a745;
+}
+
+.account-form {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.accounts-list {
+  margin-top: 2rem;
+}
+
+.accounts-list h3 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.account-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+}
+
+.account-info {
+  flex: 1;
+}
+
+.account-name {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.account-description {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin-bottom: 0.25rem;
+}
+
+.account-balance {
+  font-weight: 600;
+  color: #28a745;
+  font-size: 1.1rem;
+}
+
+.no-accounts {
+  text-align: center;
+  color: #6c757d;
+  font-style: italic;
+  padding: 2rem;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  margin-left: 1rem;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Update expense item styles for account info */
+.expense-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+}
+
+.expense-info {
+  flex: 1;
+}
+
+.expense-description {
+  font-weight: 500;
+  color: #333;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.expense-account {
+  font-size: 0.85rem;
+  color: #6c757d;
+  font-style: italic;
+}
+
+.expense-amount {
+  font-weight: 600;
+  color: #dc3545;
+  margin-left: 1rem;
+}
+
+/* Error message styling */
+.error-message {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+/* Form select styling */
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
