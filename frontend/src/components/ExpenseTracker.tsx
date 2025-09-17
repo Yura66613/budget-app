@@ -98,7 +98,7 @@ const ExpenseTracker: React.FC = () => {
       {loading && (
         <div className="loading-message" style={{ 
           textAlign: 'center', 
-          color: '#007bff', 
+          color: '#dc3545', 
           margin: '1rem 0' 
         }}>
           Loading...
